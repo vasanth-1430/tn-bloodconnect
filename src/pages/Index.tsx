@@ -4,10 +4,12 @@ import { Search, MapPin, AlertTriangle, Heart, Users, Calendar } from 'lucide-re
 import { tamilNaduDistricts, sampleEmergencyRequests } from '@/data/districts';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchBloodGroup, setSearchBloodGroup] = useState('');
+  const { t } = useLanguage();
 
   const filteredDistricts = tamilNaduDistricts.filter(district =>
     district.toLowerCase().includes(searchTerm.toLowerCase())
@@ -21,10 +23,10 @@ const Index = () => {
       <section className="bg-gradient-hero text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Save Lives Through Blood Donation
+            {t('hero.title')}
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
-            Connecting generous donors with those in urgent need across all 38 districts of Tamil Nadu
+            {t('hero.subtitle')}
           </p>
           
           {/* Quick Stats */}
@@ -34,33 +36,33 @@ const Index = () => {
                 <Users className="w-6 h-6" />
                 <span className="text-2xl font-bold">500+</span>
               </div>
-              <p className="text-white/80">Active Donors</p>
+              <p className="text-white/80">{t('stats.donors')}</p>
             </div>
             <div className="bg-white/10 rounded-lg p-4 backdrop-blur">
               <div className="flex items-center justify-center space-x-2">
                 <Heart className="w-6 h-6" />
                 <span className="text-2xl font-bold">38</span>
               </div>
-              <p className="text-white/80">Districts Covered</p>
+              <p className="text-white/80">{t('stats.districts')}</p>
             </div>
             <div className="bg-white/10 rounded-lg p-4 backdrop-blur">
               <div className="flex items-center justify-center space-x-2">
                 <Calendar className="w-6 h-6" />
                 <span className="text-2xl font-bold">24/7</span>
               </div>
-              <p className="text-white/80">Emergency Service</p>
+              <p className="text-white/80">{t('stats.service')}</p>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/join-donor">
-              <Button size="lg" className="btn-medical text-lg px-8 py-4">
-                Become a Donor
+              <Button size="lg" variant="medical" className="text-lg px-8 py-4">
+                {t('cta.donate')}
               </Button>
             </Link>
             <Link to="/emergency">
-              <Button size="lg" variant="outline" className="btn-outline-medical text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
-                Emergency Request
+              <Button size="lg" variant="outline-white" className="text-lg px-8 py-4">
+                {t('cta.emergency')}
               </Button>
             </Link>
           </div>
@@ -74,7 +76,7 @@ const Index = () => {
             <div className="emergency-banner">
               <div className="flex items-center space-x-3 mb-3">
                 <AlertTriangle className="w-6 h-6" />
-                <h2 className="text-xl font-bold">Urgent Blood Requests</h2>
+                <h2 className="text-xl font-bold">{t('emergency.urgent')}</h2>
               </div>
               <div className="grid gap-3">
                 {urgentRequests.map((request) => (
@@ -82,14 +84,14 @@ const Index = () => {
                     <div className="flex justify-between items-center">
                       <div>
                         <p className="font-semibold">
-                          {request.bloodGroup} needed for {request.patientName}
+                          {request.bloodGroup} {t('emergency.needed')} {request.patientName}
                         </p>
                         <p className="text-white/80 text-sm">
                           {request.hospitalName}, {request.district}
                         </p>
                       </div>
-                      <Button size="sm" variant="outline" className="border-white text-white hover:bg-white hover:text-destructive">
-                        Contact: {request.contactNumber}
+                      <Button size="sm" variant="emergency-contact">
+                        {t('emergency.contact')} {request.contactNumber}
                       </Button>
                     </div>
                   </div>
@@ -103,19 +105,19 @@ const Index = () => {
         <section className="mb-12">
           <div className="medical-form max-w-4xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-primary mb-4">Find Blood Donors</h2>
+              <h2 className="text-3xl font-bold text-primary mb-4">{t('search.title')}</h2>
               <p className="text-muted-foreground">
-                Search by district and blood group to find available donors near you
+                {t('search.subtitle')}
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div className="space-y-2">
-                <label className="form-label">Search District</label>
+                <label className="form-label">{t('search.district')}</label>
                 <div className="relative">
                   <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder="Enter district name..."
+                    placeholder={t('search.district.placeholder')}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="form-input pl-10"
@@ -124,13 +126,13 @@ const Index = () => {
               </div>
               
               <div className="space-y-2">
-                <label className="form-label">Blood Group (Optional)</label>
+                <label className="form-label">{t('search.bloodgroup')}</label>
                 <select 
                   value={searchBloodGroup}
                   onChange={(e) => setSearchBloodGroup(e.target.value)}
                   className="form-input"
                 >
-                  <option value="">All Blood Groups</option>
+                  <option value="">{t('search.bloodgroup.all')}</option>
                   <option value="A+">A+</option>
                   <option value="A-">A-</option>
                   <option value="B+">B+</option>
@@ -143,8 +145,8 @@ const Index = () => {
               </div>
               
               <div className="flex items-end">
-                <Button className="btn-medical w-full">
-                  Search Donors
+                <Button variant="medical" className="w-full">
+                  {t('search.button')}
                 </Button>
               </div>
             </div>
@@ -154,9 +156,9 @@ const Index = () => {
         {/* Districts Grid */}
         <section>
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-primary mb-4">Browse by District</h2>
+            <h2 className="text-3xl font-bold text-primary mb-4">{t('districts.title')}</h2>
             <p className="text-muted-foreground">
-              Select your district to find blood donors in your area
+              {t('districts.subtitle')}
             </p>
           </div>
           
@@ -168,8 +170,8 @@ const Index = () => {
                     <MapPin className="w-5 h-5 text-primary" />
                     <h3 className="font-semibold text-foreground">{district}</h3>
                   </div>
-                  <Button className="btn-medical w-full" size="sm">
-                    Find Donors
+                  <Button variant="medical" className="w-full" size="sm">
+                    {t('districts.find')}
                   </Button>
                 </div>
               </Link>
@@ -179,7 +181,7 @@ const Index = () => {
           {filteredDistricts.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground text-lg">
-                No districts found matching "{searchTerm}"
+                {t('districts.none')} "{searchTerm}"
               </p>
             </div>
           )}

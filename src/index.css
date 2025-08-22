@@ -135,6 +135,16 @@
     @apply hover:bg-primary hover:text-primary-foreground transition-all duration-300;
   }
 
+  .btn-outline-white {
+    @apply border-2 border-white text-white bg-transparent px-6 py-3 rounded-lg font-medium;
+    @apply hover:bg-white hover:text-primary transition-all duration-300;
+  }
+
+  .btn-emergency-contact {
+    @apply border border-white text-white bg-white/20 backdrop-blur px-4 py-2 rounded-md font-medium;
+    @apply hover:bg-white hover:text-destructive transition-all duration-300;
+  }
+
   /* District Card Component */
   .district-card {
     @apply bg-card border border-border rounded-xl p-6 shadow-card hover:shadow-medical;

@@ -1,18 +1,20 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Heart, Phone, MapPin, Globe } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
+  const { language, toggleLanguage, t } = useLanguage();
   
   const isActive = (path: string) => location.pathname === path;
   
   const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About Us' },
-    { path: '/contact', label: 'Contact Us' },
-    { path: '/facilities', label: 'Facilities' },
-    { path: '/join-donor', label: 'Join as Donor' },
-    { path: '/emergency', label: 'Emergency Requests' },
+    { path: '/', label: t('nav.home') },
+    { path: '/about', label: t('nav.about') },
+    { path: '/contact', label: t('nav.contact') },
+    { path: '/facilities', label: t('nav.facilities') },
+    { path: '/join-donor', label: t('nav.join') },
+    { path: '/emergency', label: t('nav.emergency') },
   ];
 
   return (
@@ -27,8 +29,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 <Heart className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-primary">Tamil Nadu Blood Foundation</h1>
-                <p className="text-sm text-muted-foreground">Saving Lives Together</p>
+                <h1 className="text-2xl font-bold text-primary">{t('site.title')}</h1>
+                <p className="text-sm text-muted-foreground">{t('site.subtitle')}</p>
               </div>
             </div>
             
@@ -36,13 +38,23 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2 text-sm">
                 <Globe className="w-4 h-4" />
-                <span className="text-primary font-medium">English</span>
+                <button 
+                  onClick={toggleLanguage}
+                  className={`font-medium ${language === 'en' ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}
+                >
+                  English
+                </button>
                 <span className="text-muted-foreground">|</span>
-                <span className="text-muted-foreground cursor-pointer hover:text-primary">தமிழ்</span>
+                <button 
+                  onClick={toggleLanguage}
+                  className={`cursor-pointer ${language === 'ta' ? 'text-primary font-medium' : 'text-muted-foreground hover:text-primary'}`}
+                >
+                  தமிழ்
+                </button>
               </div>
               <div className="hidden md:flex items-center space-x-2 bg-destructive text-white px-4 py-2 rounded-lg">
                 <Phone className="w-4 h-4" />
-                <span className="font-medium">Emergency: 1962</span>
+                <span className="font-medium">{t('emergency.hotline')}</span>
               </div>
             </div>
           </div>
@@ -83,15 +95,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 <div className="w-10 h-10 bg-gradient-medical rounded-full flex items-center justify-center">
                   <Heart className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-primary">Tamil Nadu Blood Foundation</h3>
+                <h3 className="text-xl font-bold text-primary">{t('site.title')}</h3>
               </div>
               <p className="text-muted-foreground mb-4">
-                Connecting blood donors with those in need across all 38 districts of Tamil Nadu. 
-                Together, we save lives through the gift of blood donation.
+                {language === 'en' ? 
+                  'Connecting blood donors with those in need across all 38 districts of Tamil Nadu. Together, we save lives through the gift of blood donation.' :
+                  'தமிழ்நாட்டின் 38 மாவட்டங்களில் உள்ள தேவையுள்ளவர்களுடன் இரத்த தானாளர்களை இணைக்கும். இரத்த தானத்தின் மூலம் ஒன்றிணைந்து உயிர்களை காப்போம்.'
+                }
               </p>
               <div className="flex items-center space-x-2 text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                <span>Serving all districts of Tamil Nadu, India</span>
+                <span>{language === 'en' ? 'Serving all districts of Tamil Nadu, India' : 'தமிழ்நாடு, இந்தியாவின் அனைத்து மாவட்டங்களிலும் சேவை'}</span>
               </div>
             </div>
 
