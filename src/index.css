@@ -1,42 +1,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Tamil Nadu Blood Foundation Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Medical Red & White Theme */
+    --background: 0 0% 99%;
+    --foreground: 0 0% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Blood Red Primary Theme */
+    --primary: 0 84% 45%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 0 84% 55%;
+    --primary-light: 0 84% 85%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Medical Gray Secondaries */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 0 0% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Emergency/Alert Colors */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --warning: 38 92% 50%;
+    --success: 142 76% 36%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 84% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom Medical Theme Variables */
+    --gradient-medical: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(0 84% 35%) 100%);
+    --shadow-medical: 0 4px 20px -2px hsl(var(--primary) / 0.15);
+    --shadow-card: 0 2px 8px -2px hsl(0 0% 0% / 0.1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +114,70 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+  }
+}
+
+@layer components {
+  /* Medical Button Variants */
+  .btn-medical {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-6 py-3 rounded-lg font-medium;
+    @apply hover:shadow-medical transition-all duration-300 hover:scale-105;
+  }
+  
+  .btn-emergency {
+    @apply bg-destructive text-destructive-foreground px-6 py-3 rounded-lg font-semibold;
+    @apply hover:bg-destructive/90 transition-all duration-300 animate-pulse;
+  }
+  
+  .btn-outline-medical {
+    @apply border-2 border-primary text-primary bg-transparent px-6 py-3 rounded-lg font-medium;
+    @apply hover:bg-primary hover:text-primary-foreground transition-all duration-300;
+  }
+
+  /* District Card Component */
+  .district-card {
+    @apply bg-card border border-border rounded-xl p-6 shadow-card hover:shadow-medical;
+    @apply transition-all duration-300 hover:scale-105 hover:border-primary/30 cursor-pointer;
+  }
+
+  /* Medical Form Styles */
+  .medical-form {
+    @apply bg-card border border-border rounded-xl p-8 shadow-card;
+  }
+  
+  .form-section {
+    @apply space-y-6;
+  }
+  
+  .form-label {
+    @apply text-sm font-medium text-foreground;
+  }
+  
+  .form-input {
+    @apply w-full px-4 py-3 bg-muted border border-border rounded-lg;
+    @apply focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200;
+  }
+
+  /* Blood Group Badge */
+  .blood-group {
+    @apply inline-flex items-center justify-center w-16 h-16 bg-primary text-primary-foreground;
+    @apply rounded-full font-bold text-lg hover:bg-primary-glow transition-colors duration-200;
+  }
+
+  /* Emergency Banner */
+  .emergency-banner {
+    @apply bg-gradient-to-r from-destructive to-warning text-white p-4 rounded-lg;
+    @apply border-l-4 border-white/30 shadow-lg;
+  }
+
+  /* Navigation Styles */
+  .nav-link {
+    @apply px-4 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted;
+    @apply transition-all duration-200 font-medium;
+  }
+  
+  .nav-link.active {
+    @apply text-primary bg-primary/10;
   }
 }
