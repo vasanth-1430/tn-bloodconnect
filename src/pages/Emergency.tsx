@@ -4,8 +4,10 @@ import { tamilNaduDistricts, bloodGroups, sampleEmergencyRequests } from '@/data
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Emergency = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     patientName: '',
     hospitalName: '',

@@ -2,9 +2,11 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Droplet } from 'lucide-react';
 import { bloodGroups } from '@/data/districts';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const BloodGroupSelection = () => {
   const { district } = useParams<{ district: string }>();
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-background">
@@ -13,15 +15,15 @@ const BloodGroupSelection = () => {
         <div className="mb-8">
           <Link to="/" className="inline-flex items-center text-primary hover:text-primary-glow mb-4">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Districts
+            {t('bloodgroup.back')}
           </Link>
           
           <div className="text-center">
             <h1 className="text-4xl font-bold text-primary mb-4">
-              Blood Donors in {district}
+              {t('bloodgroup.title')} {district}
             </h1>
             <p className="text-xl text-muted-foreground">
-              Select the blood group you need
+              {t('bloodgroup.subtitle')}
             </p>
           </div>
         </div>
@@ -44,11 +46,11 @@ const BloodGroupSelection = () => {
                   
                   <div className="flex items-center justify-center space-x-2 mb-4">
                     <Droplet className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">Blood Type</span>
+                    <span className="text-sm text-muted-foreground">{t('bloodgroup.type')}</span>
                   </div>
                   
                   <Button className="btn-medical w-full" size="sm">
-                    Find Donors
+                    {t('districts.find')}
                   </Button>
                 </div>
               </Link>
@@ -59,29 +61,29 @@ const BloodGroupSelection = () => {
         {/* Information Section */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <div className="medical-form">
-            <h3 className="text-xl font-semibold text-primary mb-4">Blood Compatibility</h3>
+            <h3 className="text-xl font-semibold text-primary mb-4">{t('bloodgroup.compatibility')}</h3>
             <div className="space-y-3 text-sm">
               <div className="flex justify-between">
-                <span className="font-medium">Universal Donor:</span>
+                <span className="font-medium">{t('bloodgroup.universal.donor')}</span>
                 <span className="text-primary">O-</span>
               </div>
               <div className="flex justify-between">
-                <span className="font-medium">Universal Recipient:</span>
+                <span className="font-medium">{t('bloodgroup.universal.recipient')}</span>
                 <span className="text-primary">AB+</span>
               </div>
               <p className="text-muted-foreground pt-2">
-                Remember: Always verify compatibility with medical professionals before transfusion.
+                {t('bloodgroup.verify')}
               </p>
             </div>
           </div>
           
           <div className="medical-form">
-            <h3 className="text-xl font-semibold text-primary mb-4">Donation Guidelines</h3>
+            <h3 className="text-xl font-semibold text-primary mb-4">{t('bloodgroup.guidelines')}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>• Minimum 3-month gap between donations</li>
-              <li>• Age: 18-65 years</li>
-              <li>• Weight: Minimum 50kg</li>
-              <li>• Good health condition required</li>
+              <li>• {t('bloodgroup.gap')}</li>
+              <li>• {t('bloodgroup.age')}</li>
+              <li>• {t('bloodgroup.weight')}</li>
+              <li>• {t('bloodgroup.health')}</li>
             </ul>
           </div>
         </div>

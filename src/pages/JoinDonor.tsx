@@ -4,8 +4,10 @@ import { tamilNaduDistricts, bloodGroups } from '@/data/districts';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const JoinDonor = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     fullName: '',
     age: '',

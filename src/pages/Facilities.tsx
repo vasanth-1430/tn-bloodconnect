@@ -1,7 +1,9 @@
 import { MapPin, Phone, Clock, Calendar, Building2, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Facilities = () => {
+  const { t } = useLanguage();
   const bloodBanks = [
     {
       id: 1,

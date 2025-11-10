@@ -9,7 +9,9 @@ export const tamilNaduDistricts = [
 ];
 
 export const bloodGroups = [
-  "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"
+  "A+", "A-", "A1+", "A1-", "A1B+", "A1B-", "A2+", "A2-", 
+  "A2B+", "A2B-", "AB+", "AB-", "B+", "B-", 
+  "Bombay Blood Group", "INRA", "O+", "O-"
 ];
 
 export interface Donor {
