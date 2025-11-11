@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Heart, Phone, MapPin, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import tnLogo from '@/assets/tn-logo.png';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -25,8 +26,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <div className="flex items-center justify-between h-20">
             {/* Logo & Title */}
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-gradient-medical rounded-full flex items-center justify-center">
-                <Heart className="w-7 h-7 text-white" />
+              <div className="w-14 h-14 flex items-center justify-center">
+                <img src={tnLogo} alt="Tamil Nadu Government Logo" className="w-full h-full object-contain" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-primary">{t('site.title')}</h1>
@@ -92,8 +93,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             {/* Foundation Info */}
             <div className="col-span-2">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-medical rounded-full flex items-center justify-center">
-                  <Heart className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <img src={tnLogo} alt="Tamil Nadu Government Logo" className="w-full h-full object-contain" />
                 </div>
                 <h3 className="text-xl font-bold text-primary">{t('site.title')}</h3>
               </div>
